@@ -7,15 +7,14 @@ public class EnemyController : MonoBehaviour {
 
 	Transform player;
 	NavMeshAgent agent;
-	public EnemySpawner spawner;
+	public int health = 3;
 
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("PlayerPrefabTemplate").transform;
 		agent = this.GetComponent<NavMeshAgent>();
 		this.gameObject.tag = "Enemy";
-		spawner = GameObject.Find("EnemySpawnerTemplate").GetComponent<EnemySpawner>();
-		spawner.totalEnemiesAlive++;
+		health = Random.Range(1,4);
 	}
 	
 	// Update is called once per frame
