@@ -13,6 +13,13 @@ public class BulletController : MonoBehaviour {
 				EnemySpawner.totalEnemies--;
 			}
 		}
+		else if(other.gameObject.tag == "Spawner") {
+			int spawnerHealth = other.GetComponent<EnemySpawner>().health--;
+			if(spawnerHealth <= 0) {
+				Destroy(other.gameObject);
+			}
+
+		}
 		Destroy(this.gameObject);
 	}
 }

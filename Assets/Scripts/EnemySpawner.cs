@@ -12,9 +12,12 @@ public class EnemySpawner : MonoBehaviour {
 	float timer = 0;
 	public float interval = 10;
 
+	public int health = 10;
+
 	void Start() {
 		startingEnemies = Random.Range(2,7);
 		MAX_ENEMIES = Random.Range(15,40);
+		health = Random.Range(8,12);
 	}
 
 	void Update() {
