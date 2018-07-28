@@ -70,8 +70,8 @@ public static class ControllerMappings
 
 	public static bool GetButtonDown(ControllerButtons button)
 	{
-		// Can we check for this the triggers to be down like this?????
-		return Input.GetButtonDown(Buttons[(int)button]);
+		if ((int)button < 9) return Input.GetButtonDown(Buttons[(int)button]);
+		else return Input.GetAxis(Buttons[(int)button]) > 1e-3f;
 	}
 
 	public static bool GetButtonUp(ControllerButtons button)
@@ -94,38 +94,94 @@ public static class ControllerMappings
 public class PlayerMovementComponent : MonoBehaviour
 {
 	public float speed;
+	public float stamina = 36f;
 	public Vector3 direction;
 	public Vector3 movementDir;
 	public Vector3 rbVel;
 	public GameObject playerObj;
+	private bool m_bCanDash = true;
+	private bool m_bIsDashing = false;
 	private NavMeshAgent m_NavMesh;
+	private HealthComponent m_PlayerHealth;
 
 	void Start()
     {
 		m_NavMesh = playerObj.GetComponent<NavMeshAgent>();
+		m_PlayerHealth = GetComponent<HealthComponent>();
 		m_NavMesh.updateRotation = false;
 	}
 	
+	// bad name
+	IEnumerator InvincibleForIFrames()
+	{
+		m_PlayerHealth.bIsInIFrames = true;
+		yield return new WaitForSeconds(1f);
+	}
+
+	float timer;
 	void Update()
-    {
+	{
+		// Movement and look
 		Vector2 controllerDir = ControllerMappings.GetRightStickDirection();
 		if (controllerDir.magnitude > 1e-1f)
 		{
 			direction = new Vector3(controllerDir.x, 0f, -controllerDir.y).normalized;
 			playerObj.transform.forward = direction;
 		}
-		Vector2 movementPow = ControllerMappings.GetLeftStickDirection();
-		if (movementPow.magnitude > 1e-1f)
+
+		if (!m_bIsDashing)
 		{
-			movementDir = new Vector3(movementPow.x, 0f, -movementPow.y).normalized * (speed * Time.deltaTime);
-			Vector3 destination = transform.position + movementDir;
-			m_NavMesh.destination = destination;
+			Vector2 movementPow = ControllerMappings.GetLeftStickDirection();
+			if (movementPow.magnitude > 1e-1f)
+			{
+				float dashMultiplier = 1f;
+				float totalSpeed = speed;
+				if (ControllerMappings.GetButtonDown(ControllerButtons.LeftTrigger) && m_bCanDash)
+				{
+					if (stamina - 25f > 0)
+					{
+						m_bCanDash = false;
+						m_bIsDashing = true;
+						m_PlayerHealth.bIsInIFrames = true;
+						m_NavMesh.speed = 2f;
+						dashMultiplier = 25f;
+						totalSpeed *= dashMultiplier;
+						stamina -= 25f;
+					}
+				}
+				movementDir = new Vector3(movementPow.x, 0f, -movementPow.y) * (totalSpeed * Time.deltaTime);
+				Vector3 destination = transform.position + (movementDir);
+				m_NavMesh.destination = destination;
+			}
+			else
+			{
+				movementDir = new Vector3(0f, 0f, 0f);
+				m_NavMesh.destination = transform.position;
+			}
 		}
-		else
+		if (m_NavMesh.speed > 1f)
 		{
-			movementDir = new Vector3(0f, 0f, 0f);
-			m_NavMesh.destination = transform.position;
+			m_NavMesh.speed = m_NavMesh.speed - (Time.deltaTime);
 		}
+		// Dashing
+		float dt = Time.deltaTime;
+		timer += dt;
+		if (timer > 0.9f)
+		{
+			m_bCanDash = true;
+			m_bIsDashing = false;
+			m_PlayerHealth.bIsInIFrames = false;
+			m_NavMesh.speed = 1f;
+			timer = 0f;
+		}
+		if (stamina < 36f)
+		{
+			// 23 stamina per 1.5 seconds
+			stamina += 23f * (dt / 1.5f);
+		}
+
+		// Updating camera position
+		// TODO: add lerping
 		Vector3 oldPosition = transform.position;
 		oldPosition.x = playerObj.transform.position.x;
 		oldPosition.z = playerObj.transform.position.z;
