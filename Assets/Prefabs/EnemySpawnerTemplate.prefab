@@ -137,4 +137,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9184cd76d9833942a050f8c2dcffae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  difficultyScale: 5
+  enemy: {fileID: 1344142885064174, guid: 52a035b9d8886a04f84addff434eab36, type: 2}

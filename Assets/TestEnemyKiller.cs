@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TestEnemyKiller : MonoBehaviour {
 
+	public EnemySpawner spawner;
+
 	// Use this for initialization
 	void Start () {
 		print("I exist!");
@@ -16,7 +18,8 @@ public class TestEnemyKiller : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		print("Something's hit me!");
 		if(other.gameObject.tag == "Enemy") {
-			EnemySpawner.totalEnemiesAlive--;
+			spawner.totalEnemiesAlive--;
+			spawner.totalEnemiesKilled++;
 			Destroy(other.gameObject);
 		}
 	}
