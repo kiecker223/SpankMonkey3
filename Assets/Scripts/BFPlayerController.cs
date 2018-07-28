@@ -14,7 +14,7 @@ public class BFPlayerController : MonoBehaviour {
 	bool fire, dash, drop, start, select, reload;
 	public GameObject playerObj;
 
-	public int resources = 15, ammo = 90, kills = 0;		
+	public int resources = 15, ammo = 90, kills = 0;
 	float timer;
 	public float interval = 0.2f;			// rate of fire in seconds
 	public Rigidbody bulletPrefab, barrierPrefab;
@@ -93,7 +93,7 @@ public class BFPlayerController : MonoBehaviour {
 	}
 
 	void UpdateUI() {
-		stats.text = "Resources = " + resources + "\nAmmo = " + ammo + "\nTouches Avoided = " + kills;
+		//stats.text = "Resources = " + resources + "\nAmmo = " + ammo + "\nTouches Avoided = " + kills;
 	}
 
 	// for picking up resources, ammo, and getting killed by enemies.

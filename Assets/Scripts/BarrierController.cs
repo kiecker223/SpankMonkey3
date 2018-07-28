@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BarrierController : MonoBehaviour {
 
+	UnityEngine.AI.NavMeshObstacle obstacle;
 	Rigidbody rb;
 	public int health = 5;
 
@@ -19,8 +20,9 @@ public class BarrierController : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter(Collision other) {
+	void OnTriggerEnter(Collider other) {
 		this.GetComponent<Renderer>().material.color = Color.black;
+		Debug.Log(other.gameObject.tag);
 		if(other.gameObject.tag == "Enemy") {
 			health--;
 			if(health <= 0) {
