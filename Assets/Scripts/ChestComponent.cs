@@ -53,7 +53,7 @@ public class ChestComponent : MonoBehaviour
 			obj.AddComponent<SphereCollider>().isTrigger = true;
 			var rb = obj.AddComponent<Rigidbody>();
 			rb.AddForce(new Vector3(0f, 4f, 0f), ForceMode.Impulse);
-			obj.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+			obj.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 			obj.transform.position = transform.position + new Vector3(0f, 1f, 0f);
 			yield return new WaitForSeconds(0.3f);
 		}

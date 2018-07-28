@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BarrierController : MonoBehaviour {
 
-	UnityEngine.AI.NavMeshObstacle obstacle;
 	Rigidbody rb;
 	public int health = 5;
 
