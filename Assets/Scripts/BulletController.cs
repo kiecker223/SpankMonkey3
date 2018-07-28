@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
+	void Start() {
+		Destroy(this.gameObject, 10);
+	}
+
 	void OnTriggerEnter(Collider other) {
 		print("I've hit something!");
 		if(other.gameObject.tag == "Enemy") {
@@ -18,8 +22,7 @@ public class BulletController : MonoBehaviour {
 			if(spawnerHealth <= 0) {
 				Destroy(other.gameObject);
 			}
-
 		}
-		Destroy(this.gameObject);
+		Destroy(this.gameObject);		// if it runs into anything
 	}
 }
