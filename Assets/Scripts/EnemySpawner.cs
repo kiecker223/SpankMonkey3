@@ -24,6 +24,7 @@ public class EnemySpawner : MonoBehaviour {
 	public void SpawnEnemies() {
 		for(int i = 0; i < Random.Range(startingEnemies / 2, startingEnemies); i++) {
 			if(totalEnemies < MAX_ENEMIES) {
+				Debug.Log("Spawning enemy");
 				Instantiate(enemy, transform.position, transform.rotation);
 				totalEnemies++;
 			}

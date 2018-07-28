@@ -6,21 +6,19 @@ public class Checkpoint : MonoBehaviour
 {
 	public int checkPointIdx;
 	public int checkPointValue;
+	
+	void Awake()
+	{
+		BFScoreKeeper.checkPoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+	}
 
 	public void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Player")
 		{
+			BFScoreKeeper.checkPointIdx = checkPointIdx;
+			BFScoreKeeper.score += checkPointValue;
+			BFScoreKeeper.SaveData();
 		}
-	}
-
-	void Start()
-	{
-		
-	}
-	
-	void Update()
-	{
-		
 	}
 }

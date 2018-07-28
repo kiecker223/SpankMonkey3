@@ -43,7 +43,6 @@ public class DaytimeLightController : MonoBehaviour
 		m_MoonLight = Moon.GetComponent<Light>();
 		m_StartRotation = Quaternion.Euler(0f, -30f, 0f);
 		m_EndRotation = Quaternion.Euler(179.99f, -30f, 0f);
-		Debug.Log("Thje thing work");
 		Moon.SetActive(false);
 	}
 
@@ -67,8 +66,8 @@ public class DaytimeLightController : MonoBehaviour
 		float factor = Mathf.Clamp(1 - f, 0f, 1f);
 		if (bNightFirst)
 		{
+			m_ActiveObject.SetActive(false);
 		}
-		m_ActiveLight.intensity = Mathf.Lerp(m_EndIntensity, 0f, factor);
 	}
 
 	bool bDayFirst = true;
@@ -77,8 +76,8 @@ public class DaytimeLightController : MonoBehaviour
 		float factor = Mathf.Clamp(1 - f, 0f, 1f);
 		if (bDayFirst)
 		{
+			m_ActiveObject.SetActive(false);
 		}
-		m_ActiveLight.intensity = Mathf.Lerp(m_EndIntensity, 0f, factor);
 	}
 
 	void NightLightCycle()
