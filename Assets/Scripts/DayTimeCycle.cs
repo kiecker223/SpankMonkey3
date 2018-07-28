@@ -37,14 +37,21 @@ public static class DayTimeCycle
 
 	public static void Initialize()
 	{
-		if (SwitchToDaytimeActions.Count > 0)
+		if (SwitchToNightTimeActions.Count > 0)
 		{
-			foreach (var action in SwitchToDaytimeActions)
+			foreach (var action in SwitchToNightTimeActions)
 			{
 				action();
 			}
 		}
-		time.CurrentTime = 0f;
+//		if (SwitchToDaytimeActions.Count > 0)
+//		{
+//			foreach (var action in SwitchToDaytimeActions)
+//			{
+//				action();
+//			}
+//		}
+		time.CurrentTime = 18f;
 	}
 
 	static void CallDayTimeTransitions(float f)

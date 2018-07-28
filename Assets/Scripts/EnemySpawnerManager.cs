@@ -16,7 +16,6 @@ public class EnemySpawnerManager : MonoBehaviour
 
 	void Start()
 	{
-		
 	}
 	
 	private List<EnemySpawner> FindSpawners(float distance)
@@ -32,7 +31,7 @@ public class EnemySpawnerManager : MonoBehaviour
 				result.Add(spawner);
 			}
 		}
-		if (result.Count > 3)
+		if (result.Count < 3)
 		{
 			return FindSpawners(distance + 5f);
 		}
@@ -56,6 +55,7 @@ public class EnemySpawnerManager : MonoBehaviour
 	void DeactivateSpawners()
 	{
 		bCanSpawnEnemies = false;
+		EnemySpawner.totalEnemies = 0;
 		KillAllEnemies();
 	}
 
