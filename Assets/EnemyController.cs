@@ -10,8 +10,9 @@ public class EnemyController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find("TestPlayerTemplate").transform;
+		player = GameObject.Find("PlayerPrefabTemplate").transform;
 		agent = this.GetComponent<NavMeshAgent>();
+		this.gameObject.tag = "Enemy";
 	}
 	
 	// Update is called once per frame
