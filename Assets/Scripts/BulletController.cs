@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
+	public float bulletSpeed;
+
 	void Start() {
 		Destroy(this.gameObject, 10);
+	}
+
+	void Update()
+	{
+		transform.Translate(new Vector3(0f, 0f, bulletSpeed));
 	}
 
 	void OnTriggerEnter(Collider other) {

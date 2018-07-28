@@ -25,6 +25,8 @@ public enum ControllerButtons
 	Button_Start,
 	LeftStickDown,
 	RightStickDown,
+	LeftTrigger,
+	RightTrigger,
 	NUM
 }
 
@@ -50,7 +52,9 @@ public static class ControllerMappings
 		"joystick button 5",
 		"joystick button 7",
 		"joystick button 8",
-		"joystick button 9"
+		"joystick button 9",
+		"LTrigger",
+		"RTrigger"
 	};
 
 	public static float GetAxis(ControllerAxis axis)
@@ -60,17 +64,20 @@ public static class ControllerMappings
 
 	public static bool GetButton(ControllerButtons button)
 	{
-		return Input.GetButton(Buttons[(int)button]);
+		if ((int)button < 9) return Input.GetButton(Buttons[(int)button]);
+		else return Input.GetAxis(Buttons[(int)button]) > 1e-3f;
 	}
 
 	public static bool GetButtonDown(ControllerButtons button)
 	{
+		// Can we check for this the triggers to be down like this?????
 		return Input.GetButtonDown(Buttons[(int)button]);
 	}
 
 	public static bool GetButtonUp(ControllerButtons button)
 	{
-		return Input.GetButtonUp(Buttons[(int)button]);
+		if ((int)button < 9) return Input.GetButtonUp(Buttons[(int)button]);
+		else return Input.GetAxis(Buttons[(int)button]) < 1e-3f;
 	}
 
 	public static Vector2 GetRightStickDirection()
