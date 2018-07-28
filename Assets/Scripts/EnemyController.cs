@@ -22,14 +22,6 @@ public class EnemyController : MonoBehaviour {
 		return p2;
 	}
 
-	void OnTriggerEnter(Collider other)
-	{
-		if (other.tag == "Barrier")
-		{
-			if (--other.gameObject.GetComponent<BarrierController>().health == 0) { Destroy(other.gameObject); }
-		}
-	}
-
 	// Use this for initialization
 	void Start () {
 		var foundPlayers = GameObject.FindGameObjectsWithTag("Player");
