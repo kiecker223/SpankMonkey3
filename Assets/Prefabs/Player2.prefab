@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 114381256049688480}
   - component: {fileID: 54647815182155412}
   m_Layer: 0
-  m_Name: PLayer2
+  m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,6 +546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a910df130952f4e90685567f871923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: Jupiter
+  playerId: 0
   speed: 100
   playerObj: {fileID: 1558578224309246}
