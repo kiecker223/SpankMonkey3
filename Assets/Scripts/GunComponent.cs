@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunComponent : MonoBehaviour
 {
@@ -15,13 +16,28 @@ public class GunComponent : MonoBehaviour
 	// probably set this in Start() as it will not work if we plan on using more than one type of gun
 	public Transform gunTransform;
 
+	public int totalAmmo;
+	public int magazineSize;
+	public int ammoLeftInMag;
+	public float reloadTime;
+	private float reloadTimer;
+	public string weaponName;
+	public Text infoText;
+
 	void Start()
 	{
+	}
+
+	void Reload()
+	{
+
 	}
 	
 	void Update()
 	{
-		rofTimer -= Time.deltaTime * 1000;
+		float dtMilli = Time.deltaTime * 1000f;
+		rofTimer -= dtMilli;
+		reloadTimer -= dtMilli;
 
 		if (ControllerMappings.GetButton(ControllerButtons.RightTrigger))
 		{
@@ -32,8 +48,18 @@ public class GunComponent : MonoBehaviour
 				bullet.transform.rotation = gunTransform.rotation;
 				bullet.AddComponent<BulletController>().bulletSpeed = bulletSpeed;
 				
-				rofTimer = rateOfFire;									// this is the cooldown for the rate of fire of the gun.
+				rofTimer = rateOfFire;                                  // this is the cooldown for the rate of fire of the gun.
+				ammoLeftInMag--;
+				if (ammoLeftInMag == 0)
+				{
+					Reload();
+				}
 			}
 		}
+		if (ControllerMappings.GetButtonDown(ControllerButtons.Button_X))
+		{
+			Reload();
+		}
+	//	infoText.text = 
 	}
 }
