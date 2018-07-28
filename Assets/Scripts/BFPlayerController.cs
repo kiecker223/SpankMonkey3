@@ -14,8 +14,7 @@ public class BFPlayerController : MonoBehaviour {
 	bool fire, dash, drop, start, select, reload;
 	public GameObject playerObj;
 
-	int resources = 15, ammo = 90;
-	public int kills = 0;		
+	public int resources = 15, ammo = 90, kills = 0;		
 	float timer;
 	public float interval = 0.2f;			// rate of fire in seconds
 	public Rigidbody bulletPrefab, barrierPrefab;

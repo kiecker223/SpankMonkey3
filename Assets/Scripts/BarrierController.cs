@@ -20,6 +20,7 @@ public class BarrierController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
+		this.GetComponent<Renderer>().material.color = Color.black;
 		if(other.gameObject.tag == "Enemy") {
 			health--;
 			if(health <= 0) {
