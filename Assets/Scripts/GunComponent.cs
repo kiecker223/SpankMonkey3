@@ -10,7 +10,7 @@ public class GunComponent : MonoBehaviour
 	float rofTimer = 0;
 	public AudioClip soundClip;
 	[Range(1,5)]
-	public float bulletSpeed;
+	public float bulletSpeed = 2500;
 
 	// probably set this in Start() as it will not work if we plan on using more than one type of gun
 	public Transform gunTransform;
@@ -28,10 +28,9 @@ public class GunComponent : MonoBehaviour
 			if(rofTimer <= 0) {
 				GameObject bullet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 				bullet.GetComponent<Renderer>().material.color = Color.blue;
-				bullet.transform.position = gunTransform.position;
+				bullet.transform.position = gunTransform.position + Vector3.up * 3;
 				bullet.transform.rotation = gunTransform.rotation;
 				bullet.AddComponent<BulletController>().bulletSpeed = bulletSpeed;
-
 				
 				rofTimer = rateOfFire;									// this is the cooldown for the rate of fire of the gun.
 			}
