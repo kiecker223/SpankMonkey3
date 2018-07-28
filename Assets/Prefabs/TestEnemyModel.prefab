@@ -2271,6 +2271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  nameOfPlayer: Player
 --- !u!135 &135792777278400372
 SphereCollider:
   m_ObjectHideFlags: 1
