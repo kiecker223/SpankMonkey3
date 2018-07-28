@@ -112,7 +112,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 6a1f49c5887b73f4e917aab2f740d91b, type: 2}
 --- !u!1001 &415489684
 Prefab:
   m_ObjectHideFlags: 0
@@ -162,6 +162,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23357429154134490, guid: 4296a42b860157e4c85fbe3c968cfae5,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 05c2689a199bdab408b91e8a2d08bd2f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4296a42b860157e4c85fbe3c968cfae5, type: 2}
   m_IsPrefabAsset: 0
@@ -248,7 +253,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1469626369
 BoxCollider:
@@ -348,9 +353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b5c6008b43e9e4599208719169dc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 1.2
   direction: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
+  movementDir: {x: 0, y: 0, z: 0}
   rbVel: {x: 0, y: 0, z: 0}
   playerObj: {fileID: 1741644049}
 --- !u!1 &1663420610
@@ -369,7 +374,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1663420611
 BoxCollider:
@@ -432,8 +437,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1663420610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.78, y: -0, z: 1.14}
-  m_LocalScale: {x: 41.669193, y: 1, z: 19.897722}
+  m_LocalPosition: {x: -4.3, y: 0, z: 7.523}
+  m_LocalScale: {x: 82.11498, y: 1, z: 63.609436}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -443,3 +448,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1130045356327514, guid: 4296a42b860157e4c85fbe3c968cfae5,
     type: 2}
   m_PrefabInternal: {fileID: 415489684}
+--- !u!195 &1741644054
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741644049}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum ControllerAxis
 {
@@ -87,14 +88,15 @@ public class PlayerMovementComponent : MonoBehaviour
 {
 	public float speed;
 	public Vector3 direction;
-	public Vector3 velocity;
+	public Vector3 movementDir;
 	public Vector3 rbVel;
 	public GameObject playerObj;
-	private Rigidbody m_RigidBody;
+	private NavMeshAgent m_NavMesh;
 
 	void Start()
     {
-		m_RigidBody = playerObj.GetComponent<Rigidbody>();
+		m_NavMesh = playerObj.GetComponent<NavMeshAgent>();
+		m_NavMesh.updateRotation = false;
 	}
 	
 	void Update()
@@ -108,12 +110,14 @@ public class PlayerMovementComponent : MonoBehaviour
 		Vector2 movementPow = ControllerMappings.GetLeftStickDirection();
 		if (movementPow.magnitude > 1e-1f)
 		{
-			velocity = new Vector3(movementPow.x, 0f, -movementPow.y);
-			transform.Translate(velocity * 0.3f);
+			movementDir = new Vector3(movementPow.x, 0f, -movementPow.y).normalized * (speed * Time.deltaTime);
+			Vector3 destination = transform.position + movementDir;
+			m_NavMesh.destination = destination;
 		}
 		else
 		{
-			velocity = new Vector3(0f, 0f, 0f);
+			movementDir = new Vector3(0f, 0f, 0f);
+			m_NavMesh.destination = transform.position;
 		}
 		Vector3 oldPosition = transform.position;
 		oldPosition.x = playerObj.transform.position.x;
