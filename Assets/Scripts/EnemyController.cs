@@ -8,10 +8,11 @@ public class EnemyController : MonoBehaviour {
 	Transform player;
 	NavMeshAgent agent;
 	public int health = 3;
+	public string nameOfPlayer = "PlayerPrefabTemplate";
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find("PlayerPrefabTemplate").transform;
+		player = GameObject.Find(nameOfPlayer).transform;
 		agent = this.GetComponent<NavMeshAgent>();
 		this.gameObject.tag = "Enemy";
 		health = Random.Range(1,4);
