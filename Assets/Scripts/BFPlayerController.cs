@@ -8,7 +8,7 @@ public class BFPlayerController : MonoBehaviour {
 	public int playerId = 0;
 	public Player player;
 	Rigidbody rb;
-	public float speed = 50f, bulletSpeed = 2500f;
+	public float speed = 50f, dashSpeed = 35f, bulletSpeed = 2500f;
 	Vector3 moveVector, lookVector;
 	bool fire, dash, drop, start, select, reload;
 	public GameObject playerObj;
@@ -54,10 +54,7 @@ public class BFPlayerController : MonoBehaviour {
 		//playerObj.transform.forward = lookVector;
 
 		if(fire) Shoot();
-		if(dash) {
-			print("Swoosh");
-			rb.AddForce(moveVector, ForceMode.Impulse);
-		}
+		if(dash) rb.AddForce(moveVector * dashSpeed, ForceMode.Impulse);
 		if(drop) DropBarrier();
 		if(start) print("I wanna play!");
 		if(select) print("Select");
