@@ -14,9 +14,9 @@ public class BFPlayerController : MonoBehaviour {
 	bool fire, dash, drop, start, select, reload;
 	public GameObject playerObj;
 
-	public int resources = 15, ammo = 90, kills = 0;
-	float timer;
-	public float interval = 0.2f;			// rate of fire in seconds
+	public int resources = 15, ammo = 90, kills = 0, currentClip = 20, maxClip = 20;
+	float rofTimer, dashTimer;
+	public float rofInterval = 0.2f, dashInterval = 0.5f;			// rate of fire in seconds
 	public Rigidbody bulletPrefab, barrierPrefab;
 	Transform spawner;
 
@@ -33,7 +33,8 @@ public class BFPlayerController : MonoBehaviour {
 	void Update () {
 		GetInput();
 		ProcessInput();
-		timer -= Time.deltaTime;
+		rofTimer -= Time.deltaTime;
+		dashTimer -= Time.deltaTime;
 		UpdateUI();
 	}
 
@@ -57,9 +58,12 @@ public class BFPlayerController : MonoBehaviour {
 		//playerObj.transform.forward = lookVector;
 
 		if(fire) Shoot();
-		if(dash) rb.AddForce(moveVector * dashSpeed, ForceMode.Impulse);
+		if(dash && dashTimer < 0) { 
+			rb.AddForce(moveVector * dashSpeed, ForceMode.Impulse);
+			dashTimer = 0.5f;
+		}
 		if(drop) DropBarrier();
-		if(start) print("I wanna play!");
+		if(start) Application.LoadLevel(0);
 		if(select) print("Select");
 		if(reload) Reload();
 
@@ -67,19 +71,27 @@ public class BFPlayerController : MonoBehaviour {
 
 	void Shoot() {
 		
-		if(ammo > 0 && timer <= 0) {
+		if(currentClip > 0 && rofTimer <= 0) {
 			print("Pow!");
 			Rigidbody rb = Instantiate(bulletPrefab, spawner.position, spawner.rotation);
 			rb.AddRelativeForce(Vector3.forward * bulletSpeed);
 			rb.GetComponent<BulletController>().refPlayer = this;
-			ammo--;
-			timer = interval;
+			currentClip--;
+			rofTimer = rofInterval;
 		}
 		
 	}
 
 	void Reload() {
 		print("Reloading!");
+		ammo += currentClip;
+		if(ammo >= maxClip) {
+			currentClip = maxClip;
+			ammo -= maxClip;
+		} else {
+			currentClip = ammo;
+			ammo = 0;
+		}
 	}
 
 	void DropBarrier() {
@@ -93,7 +105,7 @@ public class BFPlayerController : MonoBehaviour {
 	}
 
 	void UpdateUI() {
-		//stats.text = "Resources = " + resources + "\nAmmo = " + ammo + "\nTouches Avoided = " + kills;
+		stats.text = "Resources = " + resources + "\nAmmo = " + currentClip + "/" + ammo + "\nTouches Avoided = " + kills;
 	}
 
 	// for picking up resources, ammo, and getting killed by enemies.
@@ -102,7 +114,7 @@ public class BFPlayerController : MonoBehaviour {
 			resources += 5;
 		}
 		else if(other.gameObject.tag == "Ammo") {
-			ammo += 30;
+			ammo += maxClip;
 		}
 		else if(other.gameObject.tag == "Enemy") {
 			print("Game over man! Game over!");
