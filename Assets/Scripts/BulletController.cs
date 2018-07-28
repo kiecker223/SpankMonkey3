@@ -24,10 +24,10 @@ public class BulletController : MonoBehaviour {
 	void OnCollisionEnter(Collision other) {
 		print("I've hit something!");
 		if(other.gameObject.tag == "Enemy") {
-			int enemyHealth = other.gameObject.GetComponent<EnemyController>().health--;
-			if(enemyHealth <= 0) {
-				Destroy(other.gameObject);
+			var component = other.gameObject.GetComponent<EnemyController>();
+			if(component.health-- <= 0) {
 				EnemySpawner.totalEnemies--;
+				Destroy(other.gameObject);
 			}
 		}
 		else if(other.gameObject.tag == "Spawner") {

@@ -41,11 +41,11 @@ public class EnemySpawnerManager : MonoBehaviour
 
 	void KillAllEnemies()
 	{
-		foreach (var enemy in EnemySpawner.SpawnedEnemies)
+		var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		foreach (var enemy in enemies)
 		{
-			Object.Destroy(enemy);
+			Destroy(enemy);
 		}
-		EnemySpawner.SpawnedEnemies.Clear();
 	}
 
 	void ActivateSpawners()

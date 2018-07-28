@@ -9,7 +9,6 @@ public class EnemySpawner : MonoBehaviour {
 	public static int totalEnemies = 0;
 	public static float MAX_ENEMIES = 20;
 	public static List<EnemySpawner> ActiveSpawners = new List<EnemySpawner>();
-	public static List<GameObject> SpawnedEnemies = new List<GameObject>();
 	
 	public float interval = 10;
 
@@ -25,7 +24,7 @@ public class EnemySpawner : MonoBehaviour {
 	public void SpawnEnemies() {
 		for(int i = 0; i < Random.Range(startingEnemies / 2, startingEnemies); i++) {
 			if(totalEnemies < MAX_ENEMIES) {
-				SpawnedEnemies.Add(Instantiate(enemy, transform.position, transform.rotation));
+				Instantiate(enemy, transform.position, transform.rotation);
 				totalEnemies++;
 			}
 		}

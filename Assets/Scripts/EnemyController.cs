@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
-
+	public int id;
 	Transform player;
 	NavMeshAgent agent;
 	public int health = 3;
