@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using TMPro;
 
 public class BFPlayerController : MonoBehaviour {
 
@@ -13,12 +14,14 @@ public class BFPlayerController : MonoBehaviour {
 	bool fire, dash, drop, start, select, reload;
 	public GameObject playerObj;
 
-
-	int resources = 15, ammo = 90;			
+	int resources = 15, ammo = 90;
+	public int kills = 0;		
 	float timer;
 	public float interval = 0.2f;			// rate of fire in seconds
 	public Rigidbody bulletPrefab, barrierPrefab;
 	Transform spawner;
+
+	public TextMeshProUGUI stats;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +35,7 @@ public class BFPlayerController : MonoBehaviour {
 		GetInput();
 		ProcessInput();
 		timer -= Time.deltaTime;
+		UpdateUI();
 	}
 
 	void GetInput() {
@@ -68,6 +72,7 @@ public class BFPlayerController : MonoBehaviour {
 			print("Pow!");
 			Rigidbody rb = Instantiate(bulletPrefab, spawner.position, spawner.rotation);
 			rb.AddRelativeForce(Vector3.forward * bulletSpeed);
+			rb.GetComponent<BulletController>().refPlayer = this;
 			ammo--;
 			timer = interval;
 		}
@@ -86,6 +91,10 @@ public class BFPlayerController : MonoBehaviour {
 		} else {
 			print("You need more resources!");
 		}
+	}
+
+	void UpdateUI() {
+		stats.text = "Resources = " + resources + "\nAmmo = " + ammo + "\nTouches Avoided = " + kills;
 	}
 
 	// for picking up resources, ammo, and getting killed by enemies.

@@ -19,7 +19,7 @@ public class BarrierController : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter(Collider other) {
+	void OnCollisionEnter(Collision other) {
 		if(other.gameObject.tag == "Enemy") {
 			health--;
 			if(health <= 0) {

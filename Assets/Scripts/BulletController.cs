@@ -6,6 +6,9 @@ using UnityEngine;
 public class BulletController : MonoBehaviour {
 
 	public float bulletSpeed = 2500;
+	public int damage = 1;
+
+	public BFPlayerController refPlayer;
 
 	void Start() {
 		Destroy(this.gameObject, 10);
@@ -25,13 +28,14 @@ public class BulletController : MonoBehaviour {
 		print("I've hit something!");
 		if(other.gameObject.tag == "Enemy") {
 			var component = other.gameObject.GetComponent<EnemyController>();
-			if(component.health-- <= 0) {
+			if((component.health -= damage) <= 0) {
 				EnemySpawner.totalEnemies--;
+				refPlayer.kills++;
 				Destroy(other.gameObject);
 			}
 		}
 		else if(other.gameObject.tag == "Spawner") {
-			int spawnerHealth = other.gameObject.GetComponent<EnemySpawner>().health--;
+			int spawnerHealth = (other.gameObject.GetComponent<EnemySpawner>().health -= damage);
 			if(spawnerHealth <= 0) {
 				Destroy(other.gameObject);
 			}
