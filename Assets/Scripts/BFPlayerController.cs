@@ -65,24 +65,26 @@ public class BFPlayerController : MonoBehaviour {
 		if(drop) DropBarrier();
 		if(start) Application.LoadLevel(0);
 		if(select) print("Select");
-		if(reload) Reload();
-
+		if(reload) StartCoroutine(Reload());
 	}
 
-	void Shoot() {
-		
-		if(currentClip > 0 && rofTimer <= 0) {
+	void Shoot()
+	{
+		if (currentClip > 0 && rofTimer <= 0)
+		{
 			print("Pow!");
 			Rigidbody rb = Instantiate(bulletPrefab, spawner.position, spawner.rotation);
 			rb.AddRelativeForce(Vector3.forward * bulletSpeed);
 			rb.GetComponent<BulletController>().refPlayer = this;
 			currentClip--;
 			rofTimer = rofInterval;
+			if (currentClip == 0)
+				StartCoroutine(Reload());
 		}
-		
 	}
-
-	void Reload() {
+	
+	IEnumerator Reload() {
+		yield return new WaitForSeconds(0.3f);
 		print("Reloading!");
 		ammo += currentClip;
 		if(ammo >= maxClip) {

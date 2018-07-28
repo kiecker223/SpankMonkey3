@@ -2270,6 +2270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67421cd136997241b1a5323f2987bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   health: 3
   nameOfPlayer: Player
 --- !u!135 &135792777278400372
