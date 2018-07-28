@@ -5,15 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BulletController : MonoBehaviour {
 
-	public float bulletSpeed = 5000;
+	public float bulletSpeed = 2500;
 
 	void Start() {
 		Destroy(this.gameObject, 10);
 		//GetComponent<Collider>().isTrigger = true;		// to make it a trigger
-		Rigidbody rb = GetComponent<Rigidbody>();
-		rb.collisionDetectionMode = CollisionDetectionMode.Continuous;		// never forgets to collide with an enemy
-		rb.interpolation = RigidbodyInterpolation.Interpolate;
-		rb.AddRelativeForce(Vector3.forward * bulletSpeed);
+		//Rigidbody rb = GetComponent<Rigidbody>();
+		//rb.collisionDetectionMode = CollisionDetectionMode.Continuous;		// never forgets to collide with an enemy
+		//rb.interpolation = RigidbodyInterpolation.Interpolate;
+		//rb.AddRelativeForce(Vector3.forward * bulletSpeed);
 	}
 
 	void Update()
@@ -36,6 +36,6 @@ public class BulletController : MonoBehaviour {
 				Destroy(other.gameObject);
 			}
 		}
-		//Destroy(this.gameObject);		// if it runs into anything
+		Destroy(this.gameObject);		// if it runs into anything
 	}
 }

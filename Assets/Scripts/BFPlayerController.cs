@@ -6,24 +6,32 @@ using Rewired;
 public class BFPlayerController : MonoBehaviour {
 
 	public int playerId = 0;
-
-	Rigidbody rb;
-	public float speed = 50;
 	public Player player;
+	Rigidbody rb;
+	public float speed = 50f, bulletSpeed = 2500f;
 	Vector3 moveVector, lookVector;
-	bool fire, dash, drop;
+	bool fire, dash, drop, start, select, reload;
 	public GameObject playerObj;
+
+
+	int resources = 15, ammo = 90;			
+	float timer;
+	public float interval = 0.2f;			// rate of fire in seconds
+	public Rigidbody bulletPrefab, barrierPrefab;
+	Transform spawner;
 
 	// Use this for initialization
 	void Start () {
 		player = ReInput.players.GetPlayer(playerId);
 		rb = this.GetComponent<Rigidbody>();
+		spawner = this.transform.GetChild(0).GetChild(0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		GetInput();
 		ProcessInput();
+		timer -= Time.deltaTime;
 	}
 
 	void GetInput() {
@@ -32,9 +40,12 @@ public class BFPlayerController : MonoBehaviour {
 		lookVector.x = player.GetAxis("LookHorizontal");
 		lookVector.z = player.GetAxis("LookVertical");
 
-		fire = player.GetButtonDown("Fire");
+		fire = player.GetButton("Fire");
 		dash = player.GetButtonDown("Dash");
 		drop = player.GetButtonDown("DropBarrier");
+		start = player.GetButtonDown("Start");
+		select = player.GetButtonDown("Select");
+		reload = player.GetButtonDown("Reload");
 	}
 
 	void ProcessInput() {
@@ -42,8 +53,54 @@ public class BFPlayerController : MonoBehaviour {
 		rb.transform.forward = lookVector;
 		//playerObj.transform.forward = lookVector;
 
-		if(fire) print("Pow!");
-		if(dash) print("Swoosh");
-		if(drop) print("Barrier Dropped!");
+		if(fire) Shoot();
+		if(dash) {
+			print("Swoosh");
+			rb.AddForce(moveVector, ForceMode.Impulse);
+		}
+		if(drop) DropBarrier();
+		if(start) print("I wanna play!");
+		if(select) print("Select");
+		if(reload) Reload();
+
+	}
+
+	void Shoot() {
+		
+		if(ammo > 0 && timer <= 0) {
+			print("Pow!");
+			Rigidbody rb = Instantiate(bulletPrefab, spawner.position, spawner.rotation);
+			rb.AddRelativeForce(Vector3.forward * bulletSpeed);
+			ammo--;
+			timer = interval;
+		}
+		
+	}
+
+	void Reload() {
+		print("Reloading!");
+	}
+
+	void DropBarrier() {
+		if(resources >= 5) {
+			print("Barrier Dropped!");
+			resources -= 5;
+			Instantiate(barrierPrefab, spawner.position, spawner.rotation);
+		} else {
+			print("You need more resources!");
+		}
+	}
+
+	// for picking up resources, ammo, and getting killed by enemies.
+	void OnTriggerEnter(Collider other) {
+		if(other.gameObject.tag == "Resource") {
+			resources += 5;
+		}
+		else if(other.gameObject.tag == "Ammo") {
+			ammo += 30;
+		}
+		else if(other.gameObject.tag == "Enemy") {
+			print("Game over man! Game over!");
+		}
 	}
 }
