@@ -26,7 +26,6 @@ public class EnemySpawner : MonoBehaviour {
 			SpawnEnemies();
 			timer += interval;
 		}
-		MAX_ENEMIES += Time.deltaTime * 2;
 	}
 
 	void SpawnEnemies() {
