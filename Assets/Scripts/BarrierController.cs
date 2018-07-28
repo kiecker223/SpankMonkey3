@@ -21,8 +21,6 @@ public class BarrierController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		this.GetComponent<Renderer>().material.color = Color.black;
-		Debug.Log(other.gameObject.tag);
 		if(other.gameObject.tag == "Enemy") {
 			health--;
 			if(health <= 0) {
