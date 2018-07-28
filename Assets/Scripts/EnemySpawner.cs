@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour {
 	public GameObject enemy;
 	public int startingEnemies = 5;
 	public static int totalEnemies = 0;
-	public static int MAX_ENEMIES = 20;
+	public static float MAX_ENEMIES = 20;
 
 	float timer = 0;
 	public float interval = 10;
@@ -26,6 +26,7 @@ public class EnemySpawner : MonoBehaviour {
 			SpawnEnemies();
 			timer += interval;
 		}
+		MAX_ENEMIES += Time.deltaTime * 2;
 	}
 
 	void SpawnEnemies() {

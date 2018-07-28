@@ -5,8 +5,12 @@ using UnityEngine;
 public class GunComponent : MonoBehaviour
 {
 	// This is represented as how many milliseconds until it fires again
-	public float rateOfFire;
+	[Range(0,1000)]
+	public float rateOfFire = 1;
+	float rofTimer = 0;
 	public AudioClip soundClip;
+	[Range(1,5)]
+	public float bulletSpeed;
 
 	// probably set this in Start() as it will not work if we plan on using more than one type of gun
 	public Transform gunTransform;
@@ -17,13 +21,20 @@ public class GunComponent : MonoBehaviour
 	
 	void Update()
 	{
+		rofTimer -= Time.deltaTime * 1000;
+
 		if (ControllerMappings.GetButton(ControllerButtons.RightTrigger))
 		{
-			GameObject bullet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			bullet.GetComponent<Renderer>().material.color = Color.blue;
-			bullet.transform.position = gunTransform.position;
-			bullet.transform.rotation = gunTransform.rotation;
-			bullet.AddComponent<BulletController>().bulletSpeed = 4f;
+			if(rofTimer <= 0) {
+				GameObject bullet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+				bullet.GetComponent<Renderer>().material.color = Color.blue;
+				bullet.transform.position = gunTransform.position;
+				bullet.transform.rotation = gunTransform.rotation;
+				bullet.AddComponent<BulletController>().bulletSpeed = bulletSpeed;
+
+				
+				rofTimer = rateOfFire;									// this is the cooldown for the rate of fire of the gun.
+			}
 		}
 	}
 }

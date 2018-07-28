@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.Find("Player").transform;
+		player = GameObject.Find("PlayerPrefabTemplate").transform;
 		agent = this.GetComponent<NavMeshAgent>();
 		this.gameObject.tag = "Enemy";
 		health = Random.Range(1,4);
