@@ -9,6 +9,7 @@ public enum GunType
 	GT_Bullets
 }
 
+[RequireComponent(typeof(AudioSource))]
 public class GunComponent : MonoBehaviour
 {
 	// This is represented as how many milliseconds until it fires again
@@ -34,12 +35,15 @@ public class GunComponent : MonoBehaviour
 	public float rofInterval = 0.2f;
 	private float m_clearLinesTimer = 0.1f;
 	public string weaponName;
+	public AudioClip pow, zap, reload;
+	private AudioSource aud;
 
 	void Start()
 	{
 		m_OwningController = GetComponent<BFPlayerController>();
 		m_LaserRenderer = GetComponent<LineRenderer>();
 		m_Spawner = transform.GetChild(1).GetChild(0);
+		aud = this.GetComponent<AudioSource>();
 	}
 
 	void Update()
@@ -76,6 +80,7 @@ public class GunComponent : MonoBehaviour
 				rb.GetComponent<BulletController>().refPlayer = m_OwningController;
 				currentClip--;
 				rofTimer = rofInterval;
+				aud.PlayOneShot(pow);
 			}
 			else if (gunType == GunType.GT_Laser)
 			{
@@ -102,9 +107,10 @@ public class GunComponent : MonoBehaviour
 				m_LaserRenderer.endWidth = 0.2f;
 				m_LaserRenderer.positionCount = 2;
 				m_LaserRenderer.SetPositions(new Vector3[] { m_Spawner.position, m_Spawner.position + (m_Spawner.forward * 400f) });
-				m_clearLinesTimer = 1f;
+				m_clearLinesTimer = 0.5f;
 				currentClip -= 2;
 				rofTimer = rofInterval * 3;
+				aud.PlayOneShot(zap);
 			}
 			if (currentClip == 0)
 				Reload();
@@ -118,7 +124,7 @@ public class GunComponent : MonoBehaviour
 
 	private IEnumerator InternalReload()
 	{
-		yield return new WaitForSeconds(0.3f);
+		yield return new WaitForSeconds(1f);
 		ammo += currentClip;
 		if (ammo >= maxClip)
 		{
@@ -130,5 +136,6 @@ public class GunComponent : MonoBehaviour
 			currentClip = ammo;
 			ammo = 0;
 		}
+		aud.PlayOneShot(reload);
 	}
 }

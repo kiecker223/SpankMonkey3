@@ -9,7 +9,7 @@ public class Checkpoint : MonoBehaviour
 	
 	void Awake()
 	{
-		BFScoreKeeper.checkPoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+		BFScoreKeeper.checkPoints = GameObject.FindGameObjectsWithTag("CheckPoint");
 	}
 
 	public void OnTriggerEnter(Collider other)

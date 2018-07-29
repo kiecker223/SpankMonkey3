@@ -32,7 +32,7 @@ public class BFPlayerController : MonoBehaviour {
 		gunComponent = GetComponent<GunComponent>();
 		player = ReInput.players.GetPlayer(playerId);
 		rb = this.GetComponent<Rigidbody>();
-		spawner = this.transform.GetChild(0).GetChild(0);
+		spawner = this.transform.GetChild(1).GetChild(0);
 
 		// only works for 2 players
 		if(playerId == 0) stats = GameObject.Find("Player1Text").GetComponent<TextMeshProUGUI>();
