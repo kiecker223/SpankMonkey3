@@ -3680,6 +3680,9 @@ MonoBehaviour:
   id: 0
   health: 3
   nameOfPlayer: Player
+  materials:
+  - {fileID: 2100000, guid: 03aeca78614140947b2bd3220bc3d0c8, type: 2}
+  - {fileID: 2100000, guid: fab763f37bdaf8841aac043b74a2d1e4, type: 2}
 --- !u!135 &135792777278400372
 SphereCollider:
   m_ObjectHideFlags: 1
