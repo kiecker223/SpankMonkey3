@@ -39,7 +39,7 @@ public class GunComponent : MonoBehaviour
 	{
 		m_OwningController = GetComponent<BFPlayerController>();
 		m_LaserRenderer = GetComponent<LineRenderer>();
-		m_Spawner = transform.GetChild(0).GetChild(0);
+		m_Spawner = transform.GetChild(1).GetChild(0);
 	}
 
 	void Update()

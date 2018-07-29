@@ -882,21 +882,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actions.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actionCategoryMap.list.Array.data[0].actionIds.Array.size
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 4861733671417202, guid: 4845b244176fce541bc137c578cfa7d0, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -928,86 +913,6 @@ Prefab:
     - target: {fileID: 4861733671417202, guid: 4845b244176fce541bc137c578cfa7d0, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[11]._elementIdentifierId
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[8]._actionId
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[8]._elementIdentifierId
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[9]._actionId
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[9]._elementIdentifierId
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[10]._actionId
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[10]._elementIdentifierId
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[11]._actionId
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[11]._elementType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actions.Array.data[11]._id
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actions.Array.data[11]._name
-      value: SwitchWeapons
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actions.Array.data[11]._type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actions.Array.data[11]._descriptiveName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actions.Array.data[11]._userAssignable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actionCategoryMap.list.Array.data[0].actionIds.Array.data[11]
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 114492239835798424, guid: 4845b244176fce541bc137c578cfa7d0,
-        type: 2}
-      propertyPath: _userData.actionIdCounter
-      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4845b244176fce541bc137c578cfa7d0, type: 2}
@@ -4401,6 +4306,10 @@ Prefab:
       propertyPath: stats
       value: 
       objectReference: {fileID: 1411421191}
+    - target: {fileID: 1867218853973656, guid: 20900261b765e23428182ccb30512f73, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20900261b765e23428182ccb30512f73, type: 2}
   m_IsPrefabAsset: 0

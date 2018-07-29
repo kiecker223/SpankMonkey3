@@ -25,6 +25,7 @@ public class BFPlayerController : MonoBehaviour {
 	Transform spawner;
 
 	public TextMeshProUGUI stats;
+	Animator anim;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +33,12 @@ public class BFPlayerController : MonoBehaviour {
 		player = ReInput.players.GetPlayer(playerId);
 		rb = this.GetComponent<Rigidbody>();
 		spawner = this.transform.GetChild(0).GetChild(0);
+
+		// only works for 2 players
+		if(playerId == 0) stats = GameObject.Find("Player1Text").GetComponent<TextMeshProUGUI>();
+		else stats = GameObject.Find("Player2Text").GetComponent<TextMeshProUGUI>();
+
+		anim = this.transform.GetChild(0).GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -48,7 +55,9 @@ public class BFPlayerController : MonoBehaviour {
 			bIsInIFrames = false;
 		}
 		UpdateUI();
-	}
+
+		anim.SetFloat("PlayerSpeed", rb.velocity.magnitude);
+	}	
 
 	void GetInput() {
 		moveVector.x = player.GetAxis("MoveHorizontal");

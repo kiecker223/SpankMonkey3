@@ -25,6 +25,7 @@ public class EnemySpawnerManager : MonoBehaviour
 		float nearestSpawnerDist = distance;
 		foreach (var spawner in gEnemySpawners)
 		{
+			if (!spawner) continue;
 			float dist = Vector3.Distance(Player.transform.position, spawner.transform.position);
 			if (dist < distance)
 			{

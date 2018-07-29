@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour {
 		MAX_ENEMIES = Random.Range(15,40);
 		health = Random.Range(8,12);
 	}
-
+	
 	public void SpawnEnemies() {
 		for(int i = 0; i < Random.Range(startingEnemies / 2, startingEnemies); i++) {
 			if(totalEnemies < MAX_ENEMIES) {
