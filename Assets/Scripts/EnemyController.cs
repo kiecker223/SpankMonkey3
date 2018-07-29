@@ -42,32 +42,36 @@ public class EnemyController : MonoBehaviour
 
 	IEnumerator SpawnLoot()
 	{
-		int totalLootDropCount = Random.Range(3, 12);
-		for (int i = 0; i < totalLootDropCount; i++)
+		int chance = Mathf.FloorToInt(Random.value * 25f);
+		if (chance == 1)
 		{
-			int type = Mathf.RoundToInt(Random.value);
-			Debug.Log(type);
-			GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			obj.GetComponent<Renderer>().material = materials[type];
-			int ammount = 0;
-			switch (type)
+			int totalLootDropCount = Mathf.FloorToInt(Random.value * 5);
+			for (int i = 0; i < totalLootDropCount; i++)
 			{
-				case 0:
-					ammount = Random.Range(10, 50);
-					break;
-				case 1:
-					ammount = Random.Range(1, 70);
-					break;
+				int type = Mathf.RoundToInt(Random.value);
+				Debug.Log(type);
+				GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+				obj.GetComponent<Renderer>().material = materials[type];
+				int ammount = 0;
+				switch (type)
+				{
+					case 0:
+						ammount = Random.Range(10, 50);
+						break;
+					case 1:
+						ammount = Random.Range(1, 70);
+						break;
+				}
+				var loot = obj.AddComponent<LootComponent>();
+				loot.lootType = (LootType)type;
+				loot.ammount = ammount;
+				obj.AddComponent<SphereCollider>().isTrigger = true;
+				var rb = obj.AddComponent<Rigidbody>();
+				rb.AddForce(new Vector3(Random.Range(-0.3f, 0.3f), 9f, Random.Range(-0.3f, 0.3f)), ForceMode.Impulse);
+				obj.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+				obj.transform.position = transform.position + new Vector3(0f, 1f, 0f);
+				yield return new WaitForSeconds(0.3f);
 			}
-			var loot = obj.AddComponent<LootComponent>();
-			loot.lootType = (LootType)type;
-			loot.ammount = ammount;
-			obj.AddComponent<SphereCollider>().isTrigger = true;
-			var rb = obj.AddComponent<Rigidbody>();
-			rb.AddForce(new Vector3(Random.Range(-0.3f, 0.3f), 9f, Random.Range(-0.3f, 0.3f)), ForceMode.Impulse);
-			obj.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-			obj.transform.position = transform.position + new Vector3(0f, 1f, 0f);
-			yield return new WaitForSeconds(0.3f);
 		}
 	}
 

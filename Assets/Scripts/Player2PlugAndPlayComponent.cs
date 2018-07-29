@@ -9,13 +9,14 @@ public class Player2PlugAndPlayComponent : MonoBehaviour
 	
 	void Start()
 	{
-		player2.SetActive(false);
+		//player2.SetActive(false);
 	}
 
 	void Update()
 	{
-		if (ReInput.players.GetPlayer(1).GetButtonDown("StartButton"))
+		if (ReInput.players.GetPlayer(1).GetButtonDown("Start"))
 		{
+			Debug.LogError("The button pressed");
 			player2.SetActive(true);
 		}
 	}

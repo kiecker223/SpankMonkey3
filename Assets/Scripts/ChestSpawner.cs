@@ -14,7 +14,7 @@ public class ChestSpawner : MonoBehaviour
 	void SpawnChests()
 	{
 		int spawnChance = Mathf.FloorToInt(Random.value * 3);
-		if (spawnChance == 0 && transform.GetChild(0) != null)
+		if (spawnChance == 0 && transform.childCount == 0)
 		{
 			Instantiate(chest, transform);
 		}

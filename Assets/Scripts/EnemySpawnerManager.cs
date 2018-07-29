@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnerManager : MonoBehaviour
 {
-	public GameObject Player;
+	public GameObject playerCam;
 	public float minDistance;
 	public bool bCanSpawnEnemies = false;
 
@@ -21,12 +21,13 @@ public class EnemySpawnerManager : MonoBehaviour
 	private List<EnemySpawner> FindSpawners(float distance)
 	{
 		List<EnemySpawner> result = new List<EnemySpawner>();
-		List<EnemySpawner> gEnemySpawners = EnemySpawner.ActiveSpawners;
+		var gEnemySpawners = GameObject.FindGameObjectsWithTag("Spawner");
 		float nearestSpawnerDist = distance;
-		foreach (var spawner in gEnemySpawners)
+		foreach (var obj in gEnemySpawners)
 		{
+			var spawner = obj.GetComponent<EnemySpawner>();
 			if (!spawner) continue;
-			float dist = Vector3.Distance(Player.transform.position, spawner.transform.position);
+			float dist = Vector3.Distance(new Vector3(playerCam.transform.position.x, 0f, playerCam.transform.position.z), spawner.transform.position);
 			if (dist < distance)
 			{
 				result.Add(spawner);
