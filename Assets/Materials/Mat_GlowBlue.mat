@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Mat_GlowYellow
+  m_Name: Mat_GlowBlue
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
@@ -72,5 +72,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 0, a: 1}
-    - _EmissionColor: {r: 4.0180993, g: 4.0180993, b: 1.0097841, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.980212, a: 1}
+    - _EmissionColor: {r: 0.50489205, g: 1.9985311, b: 2.0090497, a: 1}
