@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BFDev/EnemyMechanics.unity
     guid: dabdd6a3cff3d434c8a58b1578946971
+  - enabled: 1
+    path: Assets/WinLoseScene.unity
+    guid: 3a177eccbc5b03846900057760882cc0
   m_configObjects: {}

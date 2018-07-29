@@ -517,6 +517,7 @@ GameObject:
   - component: {fileID: 120407922746184596}
   - component: {fileID: 82379748525578808}
   - component: {fileID: 164521666828435800}
+  - component: {fileID: 135101434962023642}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -3015,6 +3016,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!135 &135101434962023642
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1686993410995400}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!164 &164521666828435800
 AudioReverbFilter:
   m_ObjectHideFlags: 1
