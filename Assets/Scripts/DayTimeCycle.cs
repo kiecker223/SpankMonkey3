@@ -30,6 +30,8 @@ public static class DayTimeCycle
 	public static List<System.Action<float>> ToDaytimeTransitions = new List<System.Action<float>>();
 	public static List<System.Action> SwitchToNightTimeActions = new List<System.Action>();
 	public static List<System.Action<float>> ToNightTimeTransitions = new List<System.Action<float>>();
+	static int m_day;
+	public static int Day { get { return m_day; } }
 	public static GameTime GetTime()
 	{
 		return time;
@@ -124,6 +126,7 @@ public static class DayTimeCycle
 				}
 			}
 			time.CurrentTime = 0f;
+			m_day++;
 			secondsToFullTransition = 4f;
 		}
 		time.CurrentTime += dt;
