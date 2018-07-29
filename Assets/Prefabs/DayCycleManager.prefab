@@ -109,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1590611297604424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100.143616, y: -8.393562, z: 0.87496567}
+  m_LocalPosition: {x: 73.456635, y: 0.0000029100834, z: -24.41155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4042521845114482}
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7425b5dd0b76eb458c0ba42597dd519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  playerCam: {fileID: 0}
   minDistance: 25
   bCanSpawnEnemies: 0
 --- !u!114 &114851190923461160
@@ -247,4 +247,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af397581a9a0cea42b95b7305596a51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player2: {fileID: 1464932903963640, guid: c4cb62d43bbc19446a33891fc4cadef5, type: 2}
+  player2: {fileID: 1775652511077560, guid: c4cb62d43bbc19446a33891fc4cadef5, type: 2}
