@@ -107,13 +107,20 @@ public class BFPlayerController : MonoBehaviour {
 
 	void KillSelf()
 	{
-
+		Application.LoadLevel(2);		// winlose scene
+		PlayerPrefs.SetFloat("Score", BFScoreKeeper.score);
+		PlayerPrefs.SetInt("Win", 0);
 	}
 
 	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Enemy") {
 			if (!bIsInIFrames)
 				KillSelf();
+		}
+		else if (other.gameObject.tag == "Exit") {
+			Application.LoadLevel(2);		// winlose scene
+			PlayerPrefs.SetFloat("Score", BFScoreKeeper.score);
+			PlayerPrefs.SetInt("Win", 1);
 		}
 	}
 }
