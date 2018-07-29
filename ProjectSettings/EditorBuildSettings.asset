@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6c6f1baf50915fa48aff42d00c19cbeb
+  - enabled: 1
+    path: Assets/Scenes/BFDev/EnemyMechanics.unity
+    guid: dabdd6a3cff3d434c8a58b1578946971
   m_configObjects: {}
