@@ -4,26 +4,31 @@ using UnityEngine;
 using Rewired;
 using TMPro;
 
+[RequireComponent(typeof(GunComponent))]
 public class BFPlayerController : MonoBehaviour {
 
 	public int playerId = 0;
 	public Player player;
 	Rigidbody rb;
-	public float speed = 50f, dashSpeed = 35f, bulletSpeed = 2500f;
+	public float speed = 50f, dashSpeed = 35f;
 	Vector3 moveVector, lookVector;
-	bool fire, dash, drop, start, select, reload;
+	bool fire, dash, drop, start, select, reload, switchWeapons;
 	public GameObject playerObj;
 
-	public int resources = 15, ammo = 90, kills = 0, currentClip = 20, maxClip = 20;
+	public GunComponent gunComponent;
+
+	bool bIsInIFrames = false;
+	public int resources = 15, kills = 0;
 	float rofTimer, dashTimer;
-	public float rofInterval = 0.2f, dashInterval = 0.5f;			// rate of fire in seconds
-	public Rigidbody bulletPrefab, barrierPrefab;
+	public float dashInterval = 0.5f; // rate of fire in seconds
+	public Rigidbody barrierPrefab;
 	Transform spawner;
 
 	public TextMeshProUGUI stats;
 
 	// Use this for initialization
 	void Start () {
+		gunComponent = GetComponent<GunComponent>();
 		player = ReInput.players.GetPlayer(playerId);
 		rb = this.GetComponent<Rigidbody>();
 		spawner = this.transform.GetChild(0).GetChild(0);
@@ -33,8 +38,15 @@ public class BFPlayerController : MonoBehaviour {
 	void Update () {
 		GetInput();
 		ProcessInput();
-		rofTimer -= Time.deltaTime;
 		dashTimer -= Time.deltaTime;
+		if (dashTimer > 0f)
+		{
+			bIsInIFrames = true;
+		}
+		else
+		{
+			bIsInIFrames = false;
+		}
 		UpdateUI();
 	}
 
@@ -50,6 +62,7 @@ public class BFPlayerController : MonoBehaviour {
 		start = player.GetButtonDown("Start");
 		select = player.GetButtonDown("Select");
 		reload = player.GetButtonDown("Reload");
+		switchWeapons = player.GetButtonDown("SwitchWeapons");
 	}
 
 	void ProcessInput() {
@@ -57,43 +70,16 @@ public class BFPlayerController : MonoBehaviour {
 		rb.transform.forward = lookVector;
 		//playerObj.transform.forward = lookVector;
 
-		if(fire) Shoot();
+		if(fire) gunComponent.Shoot();
 		if(dash && dashTimer < 0) { 
 			rb.AddForce(moveVector * dashSpeed, ForceMode.Impulse);
 			dashTimer = 0.5f;
 		}
 		if(drop) DropBarrier();
-		if(start) Application.LoadLevel(0);
+		if(start) UnityEngine.SceneManagement.SceneManager.LoadScene(0);
 		if(select) print("Select");
-		if(reload) StartCoroutine(Reload());
-	}
-
-	void Shoot()
-	{
-		if (currentClip > 0 && rofTimer <= 0)
-		{
-			print("Pow!");
-			Rigidbody rb = Instantiate(bulletPrefab, spawner.position, spawner.rotation);
-			rb.AddRelativeForce(Vector3.forward * bulletSpeed);
-			rb.GetComponent<BulletController>().refPlayer = this;
-			currentClip--;
-			rofTimer = rofInterval;
-			if (currentClip == 0)
-				StartCoroutine(Reload());
-		}
-	}
-	
-	IEnumerator Reload() {
-		yield return new WaitForSeconds(0.3f);
-		print("Reloading!");
-		ammo += currentClip;
-		if(ammo >= maxClip) {
-			currentClip = maxClip;
-			ammo -= maxClip;
-		} else {
-			currentClip = ammo;
-			ammo = 0;
-		}
+		if(reload) gunComponent.Reload();
+		if (switchWeapons) gunComponent.SwitchWeapons();
 	}
 
 	void DropBarrier() {
@@ -107,19 +93,18 @@ public class BFPlayerController : MonoBehaviour {
 	}
 
 	void UpdateUI() {
-		stats.text = "Resources = " + resources + "\nAmmo = " + currentClip + "/" + ammo + "\nTouches Avoided = " + kills;
+		stats.text = "Resources = " + resources + "\nAmmo = " + gunComponent.currentClip + "/" + gunComponent.ammo + "\nTouches Avoided = " + kills;
 	}
 
-	// for picking up resources, ammo, and getting killed by enemies.
+	void KillSelf()
+	{
+
+	}
+
 	void OnTriggerEnter(Collider other) {
-		if(other.gameObject.tag == "Resource") {
-			resources += 5;
-		}
-		else if(other.gameObject.tag == "Ammo") {
-			ammo += maxClip;
-		}
-		else if(other.gameObject.tag == "Enemy") {
-			print("Game over man! Game over!");
+		if(other.gameObject.tag == "Enemy") {
+			if (!bIsInIFrames)
+				KillSelf();
 		}
 	}
 }

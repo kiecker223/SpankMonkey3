@@ -21,7 +21,7 @@ public class LootComponent : MonoBehaviour
 			switch (lootType)
 			{
 				case LootType.Ammo:
-					playerComp.ammo += ammount;
+					playerComp.gunComponent.ammo += ammount;
 					break;
 				case LootType.BuildingMaterial:
 					playerComp.resources += ammount;

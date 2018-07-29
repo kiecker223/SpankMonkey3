@@ -37,6 +37,23 @@ public static class DayTimeCycle
 
 	public static void Initialize()
 	{
+		CallSwitchToNighttimeActions();
+		time.CurrentTime = 18f;
+	}
+
+	static void CallSwitchToDaytimeActions()
+	{
+		if (SwitchToDaytimeActions.Count > 0)
+		{
+			foreach (var action in SwitchToDaytimeActions)
+			{
+				action();
+			}
+		}
+	}
+
+	static void CallSwitchToNighttimeActions()
+	{
 		if (SwitchToNightTimeActions.Count > 0)
 		{
 			foreach (var action in SwitchToNightTimeActions)
@@ -44,14 +61,6 @@ public static class DayTimeCycle
 				action();
 			}
 		}
-//		if (SwitchToDaytimeActions.Count > 0)
-//		{
-//			foreach (var action in SwitchToDaytimeActions)
-//			{
-//				action();
-//			}
-//		}
-		time.CurrentTime = 18f;
 	}
 
 	static void CallDayTimeTransitions(float f)

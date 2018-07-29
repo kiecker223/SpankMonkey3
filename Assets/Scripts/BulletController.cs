@@ -28,6 +28,7 @@ public class BulletController : MonoBehaviour {
 		print("I've hit something!");
 		if(other.gameObject.tag == "Enemy") {
 			var component = other.gameObject.GetComponent<EnemyController>();
+			component.ApplyForce(transform.forward / 2);
 			if((component.health -= damage) <= 0) {
 				EnemySpawner.totalEnemies--;
 				refPlayer.kills++;

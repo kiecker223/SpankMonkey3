@@ -43,7 +43,7 @@ public class EnemySpawnerManager : MonoBehaviour
 		var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 		foreach (var enemy in enemies)
 		{
-			Destroy(enemy);
+			enemy.GetComponent<EnemyController>().DestroyEnemy();
 		}
 	}
 
