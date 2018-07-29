@@ -118,6 +118,6 @@ public class DaytimeLightController : MonoBehaviour
 		m_ActiveLight.intensity = Mathf.Lerp(m_StartIntensity, m_EndIntensity, dtRatio);
 		m_ActiveLight.color = Color.Lerp(m_CurrentStartCol, m_CurrentEndCol, dtRatio);
 		// make it 200 second daylight cycles
-		DayTimeCycle.Tick(Time.deltaTime * 2);
+		DayTimeCycle.Tick(Time.deltaTime / 200f);
 	}
 }

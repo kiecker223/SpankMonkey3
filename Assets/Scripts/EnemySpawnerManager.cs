@@ -58,6 +58,11 @@ public class EnemySpawnerManager : MonoBehaviour
 	{
 		bCanSpawnEnemies = false;
 		EnemySpawner.totalEnemies = 0;
+//		var spawners = GameObject.FindGameObjectsWithTag("Spawner");
+//		foreach (var obj in spawners)
+//		{
+//			obj.GetComponent<EnemySpawner>().enemiesSpawned = 0;
+//		}
 		KillAllEnemies();
 	}
 
